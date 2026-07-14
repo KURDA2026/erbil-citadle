@@ -3,46 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قەڵای هەولێر - Citadel of Erbil</title>
+    <title>دەروازەی سێ ڕەهەندی قەڵای مێژوویی هەولێر</title>
     <style>
-        body { font-family: Tahoma, sans-serif; margin: 0; padding: 0; background-color: #f5f0ea; color: #333; line-height: 1.6; }
-        header { background-color: #8b5a2b; color: white; text-align: center; padding: 40px 20px; }
-        header h1 { margin: 0; font-size: 2.5em; }
-        .container { padding: 20px; max-width: 900px; margin: auto; background: white; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-radius: 8px; margin-top: 20px; margin-bottom: 40px; }
-        .hero-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; }
-        h2 { color: #8b5a2b; border-bottom: 2px solid #eaaf77; padding-bottom: 5px; }
-        .info-box { background-color: #fdfbf7; padding: 15px; border-right: 5px solid #8b5a2b; margin: 20px 0; }
-        footer { background-color: #332211; color: #ccc; text-align: center; padding: 15px; font-size: 0.9em; }
+        :root {
+            --primary: #8b5a2b;
+            --primary-light: #eaaf77;
+            --dark: #1a0f05;
+            --bg: #faf6f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section with 3D Effect */
+        .hero {
+            position: relative;
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1590075865003-e48277adc558?q=80&w=1500') no-repeat center center/cover;
+            background-attachment: fixed; /* Parallax 3D effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            transform: translateZ(50px);
+            transition: transform 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            text-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Grid Container */
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 50px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        /* 3D Interactive Card Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* 3D Card Effect */
+        .card-3d {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
+        }
+
+        .card-3d:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);
+            box-shadow: 0 30px 50px rgba(139, 90, 43, 0.2);
+        }
+
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s;
+        }
+
+        .card-3d:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        /* Detailed History Section */
+        .detail-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+        }
+
+        .detail-section h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Timline Style */
+        .timeline {
+            border-right: 3px solid var(--primary-light);
+            padding-right: 20px;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            right: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+        }
+
+        /* Map and Tourism Box */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+
+        .guide-box {
+            background: var(--dark);
+            color: #eee;
+            padding: 30px;
+            border-radius: 15px;
+            border-right: 8px solid var(--primary-light);
+        }
+
+        .guide-box h3 { color: var(--primary-light); margin-top: 0; }
+
+        footer {
+            background: var(--dark);
+            color: #888;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>قەڵای مێژوویی هەولێر</h1>
-        <p>کۆنترین قەڵای نیشتەجێبووی بەردەوام لە جیهاندا</p>
-    </header>
+    <!-- 3D Header -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>قەڵای مێژوویی هەولێر</h1>
+            <p>گەشتێک بە قووڵایی ٦,٠٠٠ ساڵ مێژووی زیندوودا</p>
+        </div>
+    </section>
 
     <div class="container">
-        <img src="https://images.unsplash.com/photo-1590075865003-e48277adc558?q=80&w=1000" alt="قەڵای هەولێر" class="hero-img">
+        
+        <!-- 3D Interactive Grid -->
+        <div class="grid">
+            
+            <div class="card-3d">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <h3>🏛️ پێکهاتە و تەلارسازی</h3>
+                    <p>قەڵاکە شێوەیەکی هێلکەیی هەیە و لە سێ گەڕەکی سەرەکی پێکدێت: سەرا، تەکیە، و تۆپخانە. خانووەکانی بە خشتی سووری کەرپووسی دروستکراون.</p>
+                </div>
+            </div>
 
-        <h2>دربارەی قەڵا</h2>
-        <p>قەڵای هەولێر تەپۆڵکەیەکی مێژووییە لە ناوەندی شاری هەولێر. مێژووی ئەم قەڵایە بۆ چەندین هەزار ساڵ پێش زایین دەگەڕێتەوە و لە ساڵی ٢٠١٤ەوە خراوەتە لیستی کەلەپووری جیهانیی **UNESCO**.</p>
+            <div class="card-3d">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1513829096999-4978602297f7?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <h3>📜 پێگەی جیهانی</h3>
+                    <p>لە ٢١ی حوزەیرانی ٢٠١٤، ڕێکخراوی یونسکۆ (UNESCO) بە فەرمی قەڵای هەولێری وەک کەلەپوورێکی جیهانی ناساند و پاراستنی لە ئەستۆ گرت.</p>
+                </div>
+            </div>
 
-        <div class="info-box">
-            <h3>📌 زانیاری گرنگ بۆ گەشتیاران</h3>
-            <ul>
-                <li><strong>ناونیشان:</strong> سەنتەری شاری هەولێر، بەرامبەر بازاڕی قەیسەری.</li>
-                <li><strong>کاتی سەردانیکردن:</strong> هەموو ڕۆژێک لە بەیانیانەوە تا ئێوارە.</li>
-                <li><strong>شوێنە گرنگەکان:</strong> مۆزەخانەی قوماشی کوردی، ماڵی کەلەپوور، و دیمەنی سەرنجڕاکێشی ناو شاری هەولێر.</li>
-            </ul>
+            <div class="card-3d">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1473163928189-364b2c4e1135?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <h3>🏺 مۆزەخانە و پارچەی کۆن</h3>
+                    <p>لە ناو قەڵادا چەندین شوێنی گرنگ هەن وەک مۆزەخانەی قوماشی کوردی و مۆزەخانەی بەردە نووسراوەکان کە شارستانیەتی دەڤەرەکە پیشان دەدەن.</p>
+                </div>
+            </div>
+
         </div>
 
-        <h2>گرنگی مێژوویی</h2>
-        <p>قەڵاکە شاهیدی چەندین شارستانیەتی جیاواز بووە وەک ئاشوورییەکان، بابلییەکان، و ساسانییەکان. بەرزی قەڵاکە لە دەوروبەری خۆی نزیكەی ٢٥ بۆ ٣٢ مەترە و ڕووبەرەکەی نزیکەی ١٠٢,٠٠٠ مەتری چوارگۆشەیە.</p>
+        <!-- Detailed Content Section -->
+        <div class="detail-section">
+            <h2>مێژووی قەڵا لە سەرچاوە مێژووییەکاندا</h2>
+            <p>قەڵای هەولێر تەپۆڵکەیەکی دەستکردە کە لە ئەنجامی نیشتەجێبوونی یەک لە دوای یەکی نەوەکان بە درێژایی مێژوو دروستبووە. لە نووسراوە بزمارییەکانی سەردەمی سۆمەرییەکاندا ناوی هاتووە و بە "ئۆربێلوم" یان "ئەربائیلۆ" (شاری چوار خوداوەند) ناسراوە.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>سەردەمی ئاشوورییەکان (پێش زایین)</h4>
+                    <p>پایتەختێکی ئایینی و نیشتمانی گرنگ بووە، پەرستگای گەورەی "ئەشتار" لێرە بووە و پادشا ئاشوورییەکان پێش جەنگ هاتوونەتە ئێرە بۆ نزا.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>سەردەمی عەباسی و ئەتابەگی</h4>
+                    <p>سەردەمێکی زێڕینی گەشەسەندن بووە کە تێیدا سوڵتان موزەفەردین گۆکبەری منارەی چۆلی و بازاڕی دەوروبەری قەڵای بنیاتنا.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>سەردەمی نوێ و نۆژەنکردنەوە</h4>
+                    <p>لە ساڵی ٢٠٠٧ەوە کۆمسیۆنی باڵای نۆژەنکردنەوەی قەڵای هەولێر بە هاوکاری فەرەنسا و یونسکۆ سەرقاڵی پاراستنی خانووە مێژووییەکانیەتی.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Info & Map -->
+        <div class="info-grid">
+            <div class="guide-box">
+                <h3>🗺️ ڕێبەری گەشتیاری و سەردانیکردن</h3>
+                <p>قەڵای هەولێر چەقی شاری هەولێرە و هەموو ڕێگاکان بەرەو ئەوێ دەچن.</p>
+                <ul>
+                    <li><strong>گەڕان لە ناو ماڵە کۆنەکان:</strong> دەتوانیت بە پێ بە ناو کووچە و کۆڵانە باریکەکاندا بگەڕێیت.</li>
+                    <li><strong>مۆزەخانەی ڕایەڵ:</strong> بۆ بینینی جلوبەرگی فۆلکلۆری و زانیاری کلتووری.</li>
+                    <li><strong>دیمەنی پانۆراما:</strong> بینینی دەوروبەری هەولێر بە ۳۶۰ پلە لە کاتی ئاوابوونی خۆردا.</li>
+                </ul>
+            </div>
+            
+            <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <!-- Interactive Google Map pointing directly to Erbil Citadel -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3219.9868770274154!2d44.00908867629631!3d36.19010470200877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x400722fe13a80e11%3A0xf69300305f8863f5!2sErbil%20Citadel!5e0!3m2!1sen!2siq!4v1700000000000!5m2!1sen!2siq" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <p>ماڵپەڕی ناساندنی قەڵای هەولێر © ٢٠٢٦</p>
+        <p>ماڵپەڕی پێشکەوتووی قەڵای هەولێر • گەشەپێدراوە لەلایەن کورد ٢٠٢٦ ©</p>
     </footer>
 
 </body>
